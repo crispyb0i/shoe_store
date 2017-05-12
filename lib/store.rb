@@ -3,20 +3,18 @@ require 'pry'
 class Store < ActiveRecord::Base
   has_and_belongs_to_many(:brands)
 
-  validates(:name, :uniqueness => true , :presence => true, :length => { :maximum => 100 })
-  # validates :name, uniqueness: { case_sensitive: false }
+  validates(:name, :uniqueness => {case_sensitive: false}, :presence => true, :length => {:maximum => 100})
 
   before_save(:capitalize)
 
-
-  def brand_string_to_brands(brand_string)
-    brand_names = brand_string.split(', ')
-    brand_names.each do |brand_name|
-      brand_match = Brand.find_by(name: brand_name)
-      if brand_match.nil?
-        self.brands.create(name: brand_name)
+  def new_brands_add (brand)
+    brands= brand.split(',')
+    brands.each do |brand|
+      brand_match = Brand.find_by(name: brand)
+      if Brand.find_by(name: brand).nil?
+        self.brands.create(name: brand)
       else
-      self.brands << brand_match
+        self.brands.push(brand_match)
        end
     end
   end

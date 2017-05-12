@@ -1,11 +1,11 @@
-<h1><%=@store.name%></h1>
+<h1><%=@brand.name%></h1>
 
 
-<h3>this store has following brands in stock:</h3>
+<h3>The following stores have the <%=@brand.name%> brand in stock:</h3>
   <ul>
     <% if @stores.any? %>
       <%@stores.each do |store|%>
-        <li><a href="/stores/<%=store.id %>">store</li>
+        <li><a href="/stores/<%=store.id %>"><%=store.name%></li>
 
     <% end %>
   </ul>

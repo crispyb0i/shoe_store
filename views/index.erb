@@ -1,10 +1,9 @@
-
-  <h1>Shoe Tracker</h1>
+<h1>Shoe Tracker</h1>
 
 <a href="/stores/new">Add a New Store</a>
 <br>
 <a href="/brands/new">Add a New Brand</a>
-
+<hr>
 <div class="row">
   <div class="col-sm-4">
     <h5>List of Stores:</h5>
@@ -21,9 +20,7 @@
     <% end %>
   </div>
 </div>
-
 <hr>
-
 <div class="row">
   <!-- Brands -->
   <div class="col-sm-4">
@@ -33,7 +30,7 @@
         <% @brands.each do |brand| %>
           <li>
             <a href="/brands/<%= brand.id %>">
-              <%= brand.name %>
+              <%= brand.name %> (<%= brand.price %>)
             </a>
           </li>
         <% end %>

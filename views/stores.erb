@@ -5,8 +5,7 @@
   <ul>
     <% if @brands.any? %>
       <%@brands.each do |brand|%>
-        <li><a href="/brands/<%=brand.id %>">brand</li>
-
+        <li><a href="/brands/<%=brand.id %>"><%=brand.name%></li>
     <% end %>
   </ul>
     <% else %>
@@ -14,3 +13,5 @@
     <% end %>
 
 <a href="/stores/<%= @store.id %>/edit">Edit This Store</a>
+<br>
+<a href="/">Home</a>
