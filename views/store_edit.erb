@@ -1,0 +1,18 @@
+<h2>update store info</h2>
+
+<form action="/stores/<%= @store.id %>" method="post">
+  <input name="_method" type="hidden" value="patch">
+  <div class="row">
+      <label for="store_name">update store name</label>
+      <input type="text" class="form-control" name="store_name" value="<%= @store.name %>">
+
+      <label for="tags">edit brands</label>
+
+      <input type="text" class="form-control" name="brand_names" value="<%= @brands %>">
+      <br>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+    <button type="submit" class="btn btn-danger" name="_method" value="delete">Delete Store</button>
+
+</form>

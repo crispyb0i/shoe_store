@@ -1,0 +1,16 @@
+<h1><%=@store.name%></h1>
+
+
+<h3>this store has following brands in stock:</h3>
+  <ul>
+    <% if @stores.any? %>
+      <%@stores.each do |store|%>
+        <li><a href="/stores/<%=store.id %>">store</li>
+
+    <% end %>
+  </ul>
+    <% else %>
+      <h4>There are currently no stores that carry this brand</h4>
+    <% end %>
+
+<a href="/">Home</a>
