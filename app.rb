@@ -26,7 +26,7 @@ post('/stores') do
 
   new_store = Store.create({name: store_name})
     if Brand.find_by(name: brand_name).nil?
-      new_store.brands.new(name: brand_name, price: brand_price).save()
+      new_store.brands.create(name: brand_name, price: brand_price)
     else
       new_store.brands.push(brand_name)
     end
@@ -47,7 +47,9 @@ patch('/stores/:id') do
   @brands = Brand.all()
   @store = Store.find(params.fetch("id").to_i)
   @store.update({name: store_name})
+  @store.brands.delete_all
   @store.brands.update({name: brand_names})
+  @store.new_brands_add(brand_names)
 
   redirect("/stores/#{id}")
 end
@@ -82,12 +84,19 @@ post('/brands') do
   brand_name = params.fetch('brand_name')
   brand_price = params.fetch('brand_price')
   brand = Brand.create({name: brand_name, price: brand_price})
-
   redirect("/")
 end
 
 get('/brands/:id') do
   @brand = Brand.find(params[:id])
   @stores = @brand.stores
+  erb(:brands)
+end
+
+patch('/brands/:id') do
+  @brand = Brand.find(params[:id])
+  @stores = @brand.stores
+  price = params.fetch('brand_price')
+  @brand.update({price: price})
   erb(:brands)
 end
